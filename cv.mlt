@@ -1,0 +1,25 @@
+open Melt
+open Latex
+open ExtLatex
+
+let prelude = "<:latex:<
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[top=1.5cm,left=2cm,right=2cm,bottom=2cm]{geometry}
+>>"
+
+let doc =
+  "Hello world!"
+
+
+let () =
+  let doc_class = "article" in
+  let options = "12pt" in
+  let document_class = Latex.documentclass doc_class ~opt:(A, options) in
+  let final = [
+    document_class;
+    required_packages;
+    prelude;
+    documentmatter doc;
+  ] in
+  emit (concat final)
