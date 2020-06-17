@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[top=1.5cm,left=2cm,right=2cm,bottom=2cm]{geometry}
+\usepackage{makecell}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{lipsum}
+
+\renewcommand{\baselinestretch}{1} 
+
+\setlength{\parindent}{0cm}
+\newlength{\datewidth}
+\newlength{\descriptionlength}
+
+\setlength{\datewidth}{3cm}
+\setlength{\descriptionlength}{\textwidth}
+\addtolength{\descriptionlength}{-\datewidth}
+
+\newcommand{\cvsection}[1]{{\large\textbf{#1}}\vspace{10pt}\par}
+
+\begin{document}
+
+\begin{center}
+{\Large Hans Jacob Fehrmann Rojas} 
+\vspace{5pt}\\
+hans.jfehrmann@gmail.com
+\end{center}
+\vspace{1.2cm}
+
+\cvsection{Professional Experience}
+
+\cvsection{Education}
+
+\newsavebox{\creation}
+
+\begin{minipage}{\textwidth}
+\begin{minipage}[t]{\datewidth}
+\raggedleft 2017 - 2020
+\end{minipage}
+\savebox{\creation}{
+\begin{minipage}[t]{\descriptionlength}
+\textbf{MSc in Computer Science} \\
+Universidad de Chile \\
+Created a new exceptional type theory which allows consistent reasoning about exceptions.
+\vspace{10pt}
+\end{minipage}
+}
+\newlength{\linerule}%
+\setlength{\linerule}{\dp\creation}%
+\addtolength{\linerule}{2pt}%
+\parbox[t][\ht\creation]{0.5pt}{\vrule height \ht\creation depth \linerule}%
+\usebox{\creation}
+\end{minipage}
+
+\begin{minipage}{\textwidth}
+\begin{minipage}[t]{\datewidth}
+\raggedleft 2017 - 2020
+\end{minipage}
+\savebox{\creation}{
+\begin{minipage}[t]{\descriptionlength}
+\textbf{MSc in Computer Science} \\
+Universidad de Chile \\
+Created a new exceptional type theory which allows consistent reasoning about exceptions.
+\end{minipage}
+}
+\vrule
+\usebox{\creation}
+\end{minipage}
+
+
+\cvsection{Language}
+
+
+\end{document}
