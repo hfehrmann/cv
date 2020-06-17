@@ -1,0 +1,2 @@
+<*.ml{,i}>: package(melt), debug
+<*.byte>: package(melt)
