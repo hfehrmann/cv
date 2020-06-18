@@ -1,15 +1,74 @@
 open Melt
 open Latex
 open ExtLatex
+open Section
 
 let prelude = "<:latex:<
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage[top=1.5cm,left=2cm,right=2cm,bottom=2cm]{geometry}
+
+\setlength{\parindent}{0pt}
+
+\newlength{\datewidth}
+\newlength{\descriptionwidth}
+\newlength{\linerule}
+
+\setlength{\datewidth}{3.5cm}
+\setlength{\descriptionwidth}{\textwidth}
+\addtolength{\descriptionwidth}{-\datewidth}
+\newsavebox{\descriptionbox}
+
 >>"
 
-let doc =
-  "Hello world!"
+let title = Title.section
+  ~author:"Hans Jacob Fehrmann Rojas"
+  ~email:"hans.jfehrmann@gmail.com"
+  ~number:"+569 7357 9093"
+  ~address:"Fontana Rosas 7106, Las Condes, Santiago. Chile"
+
+let experience =
+  let open Experience in
+  section [
+    (entry
+       ~date:"July 2019 - today"
+       ~company:"Concrete by Accenture"
+       ~job_title:"Senior iOS Developer"
+       ~description:"Check this out, thiss a paragrpah that explain what a did in concrete along
+                     my partner to develop the best app of the world"
+    );
+    (entry
+       ~date:"April 2018 {newline} April 2019"
+       ~company:"Tech-k"
+       ~job_title:"iOS and Backend Developer, Android Support"
+       ~description:"Check this out, thiss a paragrpah that explain what a did in concrete along
+                     my partner to develop the best app of the world"
+    );
+  ]
+
+let education =
+  let open Education in
+  section [
+    (entry
+       ~date:"2017 - 2020"
+       ~title:"MSc in Computer Science"
+       ~university:"Universidad de Chile"
+       ~description:"Thesis developed a new type theory"
+       ()
+    );
+    (entry
+       ~date:"2012 - 2016"
+       ~title:"BSc in Computer Science"
+       ~university:"Universidad de Chile"
+       ()
+    );
+  ]
+
+let doc = concat [
+  title;
+  experience;
+  education;
+]
 
 
 let () =

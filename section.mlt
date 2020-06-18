@@ -1,0 +1,110 @@
+open Latex
+open ExtLatex
+
+##verbatim '#' = ExtLatex.latex
+
+type entry_agrup = {
+  date : Latex.t option;
+  title: Latex.t option;
+  subtitle: Latex.t option;
+  desc: Latex.t option;
+}
+
+let date_column date =
+  let date = Option.value date empty in
+  my_minipage `Datewidth "{ragged_left} {date}"
+
+let description_column ?(is_final=false) title subtitle body =
+  let final = if is_final then empty else vspace (`Em 1.) in
+  let transformed =
+    concat_sep
+      newline
+      (List.map
+         (fun d -> Option.value d empty)
+         (List.filter Option.is_some [title; subtitle; body])
+      )
+  in
+  my_minipage
+    `Descriptionwidth
+    "{transformed}{final}"
+
+let lined_box =
+  let linerule = length_to_latex `Linerule in
+  let depth = depth_box `Descriptionbox in
+  let height = height_box `Descriptionbox in
+  "<#
+\setlength{#{linerule}#}{#{depth}#}%
+\addtolength{#{linerule}#}{2pt}%
+\parbox[t][#{height}#]{0.5pt}{\vrule height #{height}# depth #{linerule}#}%
+#>"
+
+let entry_lined_by_box first second =
+  my_minipage
+    `Textwidth
+    "{first}{save_box `Descriptionbox second}{lined_box}{use_box `Descriptionbox}"
+
+let section_title title =
+  "{large2 (textbf title)}{vspace (`Pt 10.)}"
+
+module Common = struct
+  let build_section title entries =
+    let rev_entry = List.rev entries in
+    let last = List.hd rev_entry in
+    let entry_to_latex is_last = fun entry ->
+      entry_lined_by_box
+        (date_column entry.date)
+        (description_column ~is_final:is_last entry.title entry.subtitle entry.desc)
+    in
+    let last_data = entry_to_latex true last in
+    let latex_entries =
+      List.rev (last_data :: (List.map (entry_to_latex false) (List.tl rev_entry)))
+    in
+    let title = section_title title in
+    "{title}{newline}{concat_sep newline latex_entries}{vspace (`Em 1.)}{par}"
+end
+
+module Title = struct
+
+  let section ~author ~email ~number ~address =
+    "<#
+\begin{center}
+{\Large #{textbf author}#}
+\vspace{7pt}\\
+#{email}# $|$ #{number}# \\
+#{address}#
+\end{center}
+\vspace{1.2cm}
+#>"
+
+end
+
+module Experience = struct
+
+  type t = entry_agrup
+
+  let section entries = Common.build_section "Professional Experience" entries
+
+  let entry ~date ~company ~job_title ~description  =
+    {
+      date = Some date;
+      title = Some (textbf company);
+      subtitle = Some "{vspace (`Em 0.3)}{job_title}";
+      desc = Some description
+    }
+end
+
+module Education = struct
+
+  type t = entry_agrup
+
+  let section entries = Common.build_section "Education" entries
+
+  let entry ~date ~title ~university ?description () =
+    {
+      date = Some date;
+      title = Some (textbf title);
+      subtitle = Some university;
+      desc = description
+    }
+
+end
