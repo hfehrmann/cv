@@ -1,5 +1,8 @@
 open Latex
 
+let cite t = command "cite" [T, t] T
+let bibentry t = command ~packages:["bibentry", ""] "bibentry" [T, t] T
+
 let latex : Melt.Verbatim.melt_verbatim_function = fun objs ->
   let map = function
   | `V t -> text t

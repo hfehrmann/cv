@@ -1,7 +1,12 @@
 open Latex
 open ExtLatex
+open Calendar
 
 ##verbatim '#' = ExtLatex.latex
+
+type entry_date =
+  | Single of date
+  | Between of (date * date)
 
 type entry_agrup = {
   date : Latex.t option;
@@ -18,7 +23,7 @@ let description_column ?(is_final=false) title subtitle body =
   let final = if is_final then empty else vspace (`Em 1.) in
   let transformed =
     concat_sep
-      newline
+      par
       (List.map
          (fun d -> Option.value d empty)
          (List.filter Option.is_some [title; subtitle; body])
@@ -46,6 +51,11 @@ let entry_lined_by_box first second =
 let section_title title =
   "{large2 (textbf title)}{vspace (`Pt 10.)}"
 
+let date_latex = short_date_latex
+let date_to_latex = function
+  | Between (s, f) -> "{date_latex s} - {date_latex f}"
+  | Single s -> "{date_latex s}"
+
 module Common = struct
   let build_section title entries =
     let rev_entry = List.rev entries in
@@ -68,7 +78,7 @@ module Title = struct
   let section ~author ~email ~number ~address =
     "<#
 \begin{center}
-{\Large #{textbf author}#}
+{\LARGE #{textbf author}#}
 \vspace{7pt}\\
 #{email}# $|$ #{number}# \\
 #{address}#
@@ -85,11 +95,16 @@ module Experience = struct
   let section entries = Common.build_section "Professional Experience" entries
 
   let entry ~date ~company ~job_title ~description  =
+    let date_latex =
+      match date with
+      | Between (s, f) -> "{date_latex s} - {date_latex f}"
+      | Single s -> "{date_latex s}"
+    in
     {
-      date = Some date;
+      date = Some date_latex;
       title = Some (textbf company);
-      subtitle = Some "{vspace (`Em 0.3)}{job_title}";
-      desc = Some description
+      subtitle = Some job_title;
+      desc = Some "{vspace (`Pt 6.)}{description}"
     }
 end
 
@@ -100,11 +115,51 @@ module Education = struct
   let section entries = Common.build_section "Education" entries
 
   let entry ~date ~title ~university ?description () =
+    let date_latex =
+      match date with
+      | Between (s, f) -> "{date_latex s} - {date_latex f}"
+      | Single s -> "{date_latex s}"
+    in
     {
-      date = Some date;
+      date = Some date_latex;
       title = Some (textbf title);
       subtitle = Some university;
       desc = description
+    }
+
+end
+
+module Languages = struct
+
+  type t = entry_agrup
+
+  let section entries = Common.build_section "Languages" entries
+
+  let entry ~language ~level =
+    {
+      date = Some language;
+      title = Some level;
+      subtitle = None;
+      desc = None
+    }
+
+end
+
+module Publications = struct
+
+  type t = entry_agrup
+
+  let section entries =
+    let section = Common.build_section "Publications" entries in
+    "<#\bibliographystyle{abbrv}\nobibliography{pub}#>{section}"
+
+
+  let entry ~date ~entry_name =
+    {
+      date = Some (date_to_latex date);
+      title = Some (bibentry entry_name);
+      subtitle = None;
+      desc = None
     }
 
 end

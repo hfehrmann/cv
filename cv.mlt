@@ -6,7 +6,8 @@ open Section
 let prelude = "<:latex:<
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
-\usepackage[top=1.5cm,left=2cm,right=2cm,bottom=2cm]{geometry}
+\usepackage{enumitem}
+\usepackage[top=1.5cm,left=1cm,right=2cm,bottom=2cm]{geometry}
 
 \setlength{\parindent}{0pt}
 
@@ -14,10 +15,12 @@ let prelude = "<:latex:<
 \newlength{\descriptionwidth}
 \newlength{\linerule}
 
-\setlength{\datewidth}{3.5cm}
+\setlength{\datewidth}{4cm}
 \setlength{\descriptionwidth}{\textwidth}
 \addtolength{\descriptionwidth}{-\datewidth}
 \newsavebox{\descriptionbox}
+
+\setlist{noitemsep,leftmargin=1em,nosep}
 
 >>"
 
@@ -31,18 +34,24 @@ let experience =
   let open Experience in
   section [
     (entry
-       ~date:"July 2019 - today"
+       ~date:(Between (YearMonth (Jul, 2019), Present))
        ~company:"Concrete by Accenture"
        ~job_title:"Senior iOS Developer"
        ~description:"Check this out, thiss a paragrpah that explain what a did in concrete along
                      my partner to develop the best app of the world"
     );
     (entry
-       ~date:"April 2018 {newline} April 2019"
+       ~date:(Between (YearMonth (Apr, 2018), YearMonth (Apr, 2019)))
        ~company:"Tech-k"
        ~job_title:"iOS and Backend Developer, Android Support"
-       ~description:"Check this out, thiss a paragrpah that explain what a did in concrete along
-                     my partner to develop the best app of the world"
+       ~description:"
+        {itemize [
+          ("Lead developer of iOS version of {emph "InstoreView"}. Agile cell.");
+          ("Member of team that migrated old PHP/MySQL backend into Django/Redshift. Agile cell.");
+          ("Support for old iOS and Android version of {emph "InstoreView"}");
+         ]
+        }
+        "
     );
   ]
 
@@ -50,17 +59,39 @@ let education =
   let open Education in
   section [
     (entry
-       ~date:"2017 - 2020"
+       ~date:(Between (Year 2017, Year 2020))
        ~title:"MSc in Computer Science"
        ~university:"Universidad de Chile"
-       ~description:"Thesis developed a new type theory"
+       ~description:"See Pédrot et Al"
        ()
     );
     (entry
-       ~date:"2012 - 2016"
+       ~date:(Between (Year 2012, Year 2016))
        ~title:"BSc in Computer Science"
        ~university:"Universidad de Chile"
        ()
+    );
+  ]
+
+let languages =
+  let open Languages in
+  section [
+    (entry
+       ~language:"English"
+       ~level:"Advanced"
+    );
+    (entry
+       ~language:"Spanish"
+       ~level:"Native"
+    );
+  ]
+
+let publications =
+  let open Publications in
+  section [
+    (entry
+       ~date:(Single (Year 2019))
+       ~entry_name:"pedrotAl:icfp2019"
     );
   ]
 
@@ -68,6 +99,8 @@ let doc = concat [
   title;
   experience;
   education;
+  languages;
+  publications;
 ]
 
 

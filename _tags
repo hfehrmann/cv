@@ -1,2 +1,2 @@
-<*.ml{,i}>: package(melt), debug
+<*.ml{,i}>: package(melt), debug, dep(pub.bib)
 <*.byte>: package(melt)
