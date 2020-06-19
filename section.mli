@@ -9,6 +9,10 @@ module Title: sig
   val section: author:t -> email:t -> number:t -> address:t -> t
 end
 
+module Profile: sig
+  val section: body:Latex.t -> Latex.t
+end
+
 module Experience: sig
   type t
   val section: t list ->  Latex.t
@@ -23,9 +27,15 @@ module Education: sig
 end
 
 module Languages: sig
-type t
+  type t
   val section: t list -> Latex.t
   val entry: language:Latex.t -> level:Latex.t -> t
+end
+
+module Skills: sig
+  type t
+  val section: t list -> Latex.t
+  val entry: skill:Latex.t -> description:Latex.t -> t
 end
 
 module Publications: sig

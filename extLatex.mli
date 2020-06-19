@@ -2,6 +2,7 @@ open Latex
 
 val cite: t -> t
 val bibentry: t -> t
+val vbox: t -> t
 val latex: Melt.Verbatim.melt_verbatim_function
 
 type my_size = [

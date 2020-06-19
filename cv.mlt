@@ -7,7 +7,8 @@ let prelude = "<:latex:<
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{enumitem}
-\usepackage[top=1.5cm,left=1cm,right=2cm,bottom=2cm]{geometry}
+\usepackage[top=1.5cm,left=1.5cm,right=2cm,bottom=2cm]{geometry}
+\usepackage{nopageno}
 
 \setlength{\parindent}{0pt}
 
@@ -28,7 +29,17 @@ let title = Title.section
   ~author:"Hans Jacob Fehrmann Rojas"
   ~email:"hans.jfehrmann@gmail.com"
   ~number:"+569 7357 9093"
-  ~address:"Fontana Rosas 7106, Las Condes, Santiago. Chile"
+  ~address:"Santiago, Chile"
+
+let profile =
+  let body =
+    "I am a senior iOS developer with a solid knowledge about
+     application architecture with focus on maintainability and scalability,
+     and strong computer science background. {newline}
+     Always willing to learn, and teach knowledge.
+    "
+  in
+  Profile.section ~body
 
 let experience =
   let open Experience in
@@ -37,8 +48,8 @@ let experience =
        ~date:(Between (YearMonth (Jul, 2019), Present))
        ~company:"Concrete by Accenture"
        ~job_title:"Senior iOS Developer"
-       ~description:"Check this out, thiss a paragrpah that explain what a did in concrete along
-                     my partner to develop the best app of the world"
+       ~description:"Developed new iOS application for {emph "Banco Itau"} as team member.
+                     Worked in agile cell. Designed application architecture."
     );
     (entry
        ~date:(Between (YearMonth (Apr, 2018), YearMonth (Apr, 2019)))
@@ -46,12 +57,25 @@ let experience =
        ~job_title:"iOS and Backend Developer, Android Support"
        ~description:"
         {itemize [
-          ("Lead developer of iOS version of {emph "InstoreView"}. Agile cell.");
-          ("Member of team that migrated old PHP/MySQL backend into Django/Redshift. Agile cell.");
-          ("Support for old iOS and Android version of {emph "InstoreView"}");
+          ("Lead developer of iOS version of {emph "InstoreView"}. Worked in agile cell.");
+          ("Member of team that migrated old PHP/MySQL backend into Django/Redshift.
+              Worked in Agile cell.");
+          ("Gave support for old iOS and Android version of {emph "InstoreView"}.");
          ]
         }
         "
+    );
+    (entry
+       ~date:(Between (YearMonth (Jul, 2017), YearMonth (Apr, 2018)))
+       ~company:"TranSapp"
+       ~job_title:"iOS Developer"
+       ~description:"Main developer of {emph "TranSapp"} app for iOS version"
+    );
+    (entry
+       ~date:(Between (YearMonth (Aug, 2016), YearMonth (Jul, 2017)))
+       ~company:"Lazarillo Startup"
+       ~job_title:"iOS Developer"
+       ~description:"Main developer of {emph "Lazarillo"} app for iOS version"
     );
   ]
 
@@ -62,7 +86,7 @@ let education =
        ~date:(Between (Year 2017, Year 2020))
        ~title:"MSc in Computer Science"
        ~university:"Universidad de Chile"
-       ~description:"See Pédrot et Al"
+       ~description:"See (Pédrot et Al, 2019)"
        ()
     );
     (entry
@@ -78,11 +102,28 @@ let languages =
   section [
     (entry
        ~language:"English"
-       ~level:"Advanced"
+       ~level:"Advanced (without certification)"
     );
     (entry
        ~language:"Spanish"
        ~level:"Native"
+    );
+  ]
+
+let skills =
+  let open Skills in
+  section [
+    (entry
+       ~skill:"Prog. Lang."
+       ~description:"Swift, Objective-C, Kotlin, Coq, Ocaml"
+    );
+    (entry
+       ~skill:"Main Frameworks"
+       ~description:"RxSwift, Realm, Firebase, Fastlane"
+    );
+    (entry
+       ~skill:"Other Frameworks"
+       ~description:"Django"
     );
   ]
 
@@ -97,9 +138,11 @@ let publications =
 
 let doc = concat [
   title;
+  profile;
   experience;
   education;
   languages;
+  vbox skills;
   publications;
 ]
 

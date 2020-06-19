@@ -39,7 +39,7 @@ let lined_box =
   let height = height_box `Descriptionbox in
   "<#
 \setlength{#{linerule}#}{#{depth}#}%
-\addtolength{#{linerule}#}{2pt}%
+\addtolength{#{linerule}#}{1pt}%
 \parbox[t][#{height}#]{0.5pt}{\vrule height #{height}# depth #{linerule}#}%
 #>"
 
@@ -86,6 +86,12 @@ module Title = struct
 \vspace{1.2cm}
 #>"
 
+end
+
+module Profile = struct
+  let section ~body =
+    let title = large2 (textbf "Profile") in
+    "{title}{center body}{vspace (`Em 1.)}{par}"
 end
 
 module Experience = struct
@@ -139,6 +145,22 @@ module Languages = struct
     {
       date = Some language;
       title = Some level;
+      subtitle = None;
+      desc = None
+    }
+
+end
+
+module Skills = struct
+
+  type t = entry_agrup
+
+  let section entries = Common.build_section "Skills" entries
+
+  let entry ~skill ~description =
+    {
+      date = Some skill;
+      title = Some description;
       subtitle = None;
       desc = None
     }
