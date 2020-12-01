@@ -1,5 +1,7 @@
 open Latex
 
+module Current = Language.Current
+
 type month =
   | Jan
   | Feb
@@ -15,18 +17,18 @@ type month =
   | Dec
 
 let short_month = function
-  | Jan -> text "Jan"
-  | Feb -> text "Feb"
-  | Mar -> text "Mar"
-  | Apr -> text "Apr"
-  | May -> text "May"
-  | Jun -> text "Jun"
-  | Jul -> text "Jul"
-  | Aug -> text "Aug"
-  | Sep -> text "Sep"
-  | Oct -> text "Oct"
-  | Nov -> text "Nov"
-  | Dec -> text "Dec"
+  | Jan -> Current.short_jan
+  | Feb -> Current.short_feb
+  | Mar -> Current.short_mar
+  | Apr -> Current.short_apr
+  | May -> Current.short_may
+  | Jun -> Current.short_jun
+  | Jul -> Current.short_jul
+  | Aug -> Current.short_aug
+  | Sep -> Current.short_sep
+  | Oct -> Current.short_oct
+  | Nov -> Current.short_nov
+  | Dec -> Current.short_dec
 
 let long_month = function
   | Jan -> text "January"
@@ -50,9 +52,9 @@ type date =
 let short_date_latex = function
   | YearMonth (m, y) -> short_month m ^^ text ". " ^^ latex_of_int y
   | Year y -> latex_of_int y
-  | Present -> text "Present"
+  | Present -> Current.present
 
 let long_date_latex = function
   | YearMonth (m, y) -> long_month m ^^ text " " ^^ latex_of_int y
   | Year y -> latex_of_int y
-  | Present -> text "Present"
+  | Present -> Current.present

@@ -4,6 +4,8 @@ open Calendar
 
 ##verbatim '#' = ExtLatex.latex
 
+module Current = Language.Current
+
 type entry_date =
   | Single of date
   | Between of (date * date)
@@ -90,7 +92,7 @@ end
 
 module Profile = struct
   let section ~body =
-    let title = large2 (textbf "Profile") in
+    let title = large2 (textbf Current.profile) in
     "{title}{center body}{vspace (`Em 1.)}{par}"
 end
 
@@ -98,7 +100,7 @@ module Experience = struct
 
   type t = entry_agrup
 
-  let section entries = Common.build_section "Professional Experience" entries
+  let section entries = Common.build_section Current.professional_experience entries
 
   let entry ~date ~company ~job_title ~description  =
     let date_latex =
@@ -118,7 +120,7 @@ module Education = struct
 
   type t = entry_agrup
 
-  let section entries = Common.build_section "Education" entries
+  let section entries = Common.build_section Current.education entries
 
   let entry ~date ~title ~university ?description () =
     let date_latex =
@@ -139,7 +141,7 @@ module Languages = struct
 
   type t = entry_agrup
 
-  let section entries = Common.build_section "Languages" entries
+  let section entries = Common.build_section Current.languages entries
 
   let entry ~language ~level =
     {
@@ -155,7 +157,7 @@ module Skills = struct
 
   type t = entry_agrup
 
-  let section entries = Common.build_section "Skills" entries
+  let section entries = Common.build_section Current.skills entries
 
   let entry ~skill ~description =
     {

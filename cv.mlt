@@ -16,7 +16,7 @@ let prelude = "<:latex:<
 \newlength{\descriptionwidth}
 \newlength{\linerule}
 
-\setlength{\datewidth}{4cm}
+\setlength{\datewidth}{4.3cm}
 \setlength{\descriptionwidth}{\textwidth}
 \addtolength{\descriptionwidth}{-\datewidth}
 \newsavebox{\descriptionbox}
@@ -25,6 +25,8 @@ let prelude = "<:latex:<
 
 >>"
 
+module Lang = Language.Current
+
 let title = Title.section
   ~author:"Hans Jacob Fehrmann Rojas"
   ~email:"hans.jfehrmann@gmail.com"
@@ -32,13 +34,7 @@ let title = Title.section
   ~address:"Santiago, Chile"
 
 let profile =
-  let body =
-    "I am a senior iOS developer with a solid knowledge about
-     application architecture with focus on maintainability and scalability,
-     and strong computer science background. {newline}
-     Always willing to learn, and teach knowledge.
-    "
-  in
+  let body = Lang.profile_description in
   Profile.section ~body
 
 let experience =
@@ -47,20 +43,18 @@ let experience =
     (entry
        ~date:(Between (YearMonth (Jul, 2019), Present))
        ~company:"Concrete by Accenture"
-       ~job_title:"Senior iOS Developer"
-       ~description:"Developed new iOS application for {emph "Banco Itau"} as team member.
-                     Worked in agile cell. Designed application architecture."
+       ~job_title:Lang.concrete_job
+       ~description:Lang.concrete_description
     );
     (entry
        ~date:(Between (YearMonth (Apr, 2018), YearMonth (Apr, 2019)))
        ~company:"Tech-k"
-       ~job_title:"iOS and Backend Developer, Android Support"
+       ~job_title:Lang.techk_job
        ~description:"
         {itemize [
-          ("Lead developer of iOS version of {emph "InstoreView"}. Worked in agile cell.");
-          ("Member of team that migrated old PHP/MySQL backend into Django/Redshift.
-              Worked in Agile cell.");
-          ("Gave support for old iOS and Android version of {emph "InstoreView"}.");
+          Lang.techk_description1;
+          Lang.techk_description2;
+          Lang.techk_description3;
          ]
         }
         "
@@ -68,14 +62,14 @@ let experience =
     (entry
        ~date:(Between (YearMonth (Jul, 2017), YearMonth (Apr, 2018)))
        ~company:"TranSapp"
-       ~job_title:"iOS Developer"
-       ~description:"Main developer of {emph "TranSapp"} app for iOS version"
+       ~job_title:Lang.transapp_title
+       ~description:Lang.transapp_description
     );
     (entry
        ~date:(Between (YearMonth (Aug, 2016), YearMonth (Jul, 2017)))
        ~company:"Lazarillo Startup"
-       ~job_title:"iOS Developer"
-       ~description:"Main developer of {emph "Lazarillo"} app for iOS version"
+       ~job_title:Lang.lazarillo_title
+       ~description:Lang.lazarillo_description
     );
   ]
 
@@ -84,14 +78,13 @@ let education =
   section [
     (entry
        ~date:(Between (Year 2017, Year 2020))
-       ~title:"MSc in Computer Science"
+       ~title:Lang.education_msc
        ~university:"Universidad de Chile"
-       ~description:"See (Pédrot et Al, 2019)"
        ()
     );
     (entry
        ~date:(Between (Year 2012, Year 2016))
-       ~title:"BSc in Computer Science"
+       ~title:Lang.education_prof
        ~university:"Universidad de Chile"
        ()
     );
@@ -101,12 +94,12 @@ let languages =
   let open Languages in
   section [
     (entry
-       ~language:"English"
-       ~level:"Advanced (without certification)"
+       ~language:Lang.lang_english
+       ~level:Lang.lang_english_level
     );
     (entry
-       ~language:"Spanish"
-       ~level:"Native"
+       ~language:Lang.lang_spanish
+       ~level:Lang.lang_spanish_level
     );
   ]
 
@@ -114,16 +107,16 @@ let skills =
   let open Skills in
   section [
     (entry
-       ~skill:"Prog. Lang."
-       ~description:"Swift, Objective-C, Kotlin, Coq, Ocaml"
+       ~skill:Lang.skill_lang
+       ~description:Lang.skill_lang_desc
     );
     (entry
-       ~skill:"Main Frameworks"
-       ~description:"RxSwift, Realm, Firebase, Fastlane"
+       ~skill:Lang.skill_framework
+       ~description:Lang.skill_framework_desc
     );
     (entry
-       ~skill:"Other Frameworks"
-       ~description:"Django"
+       ~skill:Lang.skill_other_framework
+       ~description:Lang.skill_other_framework_desc
     );
   ]
 
@@ -143,7 +136,7 @@ let doc = concat [
   education;
   languages;
   vbox skills;
-  publications;
+  (*publications;*)
 ]
 
 

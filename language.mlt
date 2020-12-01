@@ -1,0 +1,188 @@
+open Melt
+open Latex
+
+module type Language = sig
+  val profile: Latex.t
+  val profile_description: Latex.t
+
+  val professional_experience: Latex.t
+  val concrete_job: Latex.t
+  val concrete_description: Latex.t
+  val techk_job: Latex.t
+  val techk_description1: Latex.t
+  val techk_description2: Latex.t
+  val techk_description3: Latex.t
+  val transapp_title: Latex.t
+  val transapp_description: Latex.t
+  val lazarillo_title: Latex.t
+  val lazarillo_description: Latex.t
+
+  val education: Latex.t
+  val education_msc: Latex.t
+  val education_prof: Latex.t
+
+  val languages: Latex.t
+  val lang_english: Latex.t
+  val lang_english_level: Latex.t
+  val lang_spanish: Latex.t
+  val lang_spanish_level: Latex.t
+
+  val skills: Latex.t
+  val skill_lang: Latex.t
+  val skill_lang_desc: Latex.t
+  val skill_framework: Latex.t
+  val skill_framework_desc: Latex.t
+  val skill_other_framework: Latex.t
+  val skill_other_framework_desc: Latex.t
+
+  val short_jan: Latex.t
+  val short_feb: Latex.t
+  val short_mar: Latex.t
+  val short_apr: Latex.t
+  val short_may: Latex.t
+  val short_jun: Latex.t
+  val short_jul: Latex.t
+  val short_aug: Latex.t
+  val short_sep: Latex.t
+  val short_oct: Latex.t
+  val short_nov: Latex.t
+  val short_dec: Latex.t
+  val present: Latex.t
+end
+
+module Spanish: Language = struct
+
+  let profile = "Perfil"
+  let profile_description =
+    "Desarrollador senior iOS con profundo conocimiento en arquitecturas
+     de aplicación con foco en mantenibilidad y escalabilidad, y una base
+     solida en ciencias de la computación. {newline}
+     Siempre dispuesto a aprender, y enseñar conocimiento."
+
+   let professional_experience= "Experiencia Profesional"
+
+  let concrete_job = "Desarrollador Senior iOS"
+  let concrete_description =
+    "Desarrollo nueva aplicación para {emph "Banco Itau"} como miembro de equipo.
+     Trabajo en célula ágil. Diseño de arquitectura de aplicación."
+
+  let techk_job = "Desarrollador iOS y Backend, Soporte a Android"
+  let techk_description1 =
+    "Desarrollador lider de la versión iOS de la aplicación {emph "InstoreView"}.
+     Trabajo en célula ágil."
+  let techk_description2 =
+    "Miembro de equipo que migró antiguo backend en PHP/MySQL hacia Django/Redshift.
+     Trabajo en celula ágil."
+  let techk_description3 =
+    "Soporte para antigua version iOS y Android de {emph "InstoreView"}."
+
+  let transapp_title = "Desarrollador iOS"
+  let transapp_description =
+    "Principal desarrollador de aplicación {emph "TranSapp"} en su versión iOS."
+
+  let lazarillo_title = "Desarrollador iOS"
+  let lazarillo_description =
+        "Principal desarrollador de aplicación {emph "Lazarillo"} en su versión iOS."
+
+  let education = "Educación"
+  let education_msc = "Magíster en Ciencias de la Computación"
+  let education_prof = "Ingeniería Civil en Computación"
+
+  let languages = "Idiomas"
+  let lang_english = "Ingles"
+  let lang_english_level = "Avanzado (sin certificación)"
+  let lang_spanish = "Español"
+  let lang_spanish_level = "Nativo"
+
+  let skills = "Habilidades"
+  let skill_lang = "Leng. de Prog."
+  let skill_lang_desc = "Swift, Objective-C, Kotlin, Coq, Ocaml"
+
+  let skill_framework = "Principales Frameworks"
+  let skill_framework_desc = "RxSwift, Realm, Firebase, Fastlane"
+
+  let skill_other_framework = "Otros Frameworks"
+  let skill_other_framework_desc = "Django"
+
+  let short_jan = "Ene"
+  let short_feb = "Feb"
+  let short_mar = "Mar"
+  let short_apr = "Abr"
+  let short_may = "May"
+  let short_jun = "Jun"
+  let short_jul = "Jul"
+  let short_aug = "Ago"
+  let short_sep = "Sep"
+  let short_oct = "Oct"
+  let short_nov = "Nov"
+  let short_dec = "Dic"
+  let present = "Presente"
+end
+
+module English: Language = struct
+
+  let profile = "Profile"
+  let profile_description =
+    "I am a senior iOS developer with a solid knowledge about
+     application architecture with focus on maintainability and scalability,
+     and strong computer science background. {newline}
+     Always willing to learn, and teach knowledge."
+
+  let professional_experience= "Professional Experience"
+
+  let concrete_job = "Senior iOS Developer"
+  let concrete_description =
+    "Developed new iOS application for {emph "Banco Itau"} as team member.
+     Worked in agile cell. Designed application architecture."
+
+  let techk_job = "iOS and Backend Developer, Android Support"
+  let techk_description1 =
+    "Lead developer of iOS version of {emph "InstoreView"}. Worked in agile cell."
+  let techk_description2 =
+    "Member of team that migrated old PHP/MySQL backend into Django/Redshift.
+     Worked in Agile cell."
+  let techk_description3 =
+    "Gave support for old iOS and Android version of {emph "InstoreView"}."
+
+  let transapp_title = "iOS Developer"
+  let transapp_description = "Main developer of {emph "TranSapp"} app for iOS version"
+
+  let lazarillo_title = "iOS Developer"
+  let lazarillo_description = "Main developer of {emph "Lazarillo"} app for iOS version"
+
+  let education = "Education"
+  let education_msc = "MSc in Computer Science"
+  let education_prof = "BSc in Computer Science"
+
+  let languages = "Languages"
+  let lang_english = "English"
+  let lang_english_level = "Advanced (without certification)"
+  let lang_spanish = "Spanish"
+  let lang_spanish_level = "Native"
+
+  let skills = "Skills"
+  let skill_lang = "Prog. Lang."
+  let skill_lang_desc = "Swift, Objective-C, Kotlin, Coq, Ocaml"
+
+  let skill_framework = "Main Frameworks"
+  let skill_framework_desc = "RxSwift, Realm, Firebase, Fastlane"
+
+  let skill_other_framework = "Other Frameworks"
+  let skill_other_framework_desc = "Django"
+
+  let short_jan = "Jan"
+  let short_feb = "Feb"
+  let short_mar = "Mar"
+  let short_apr = "Apr"
+  let short_may = "May"
+  let short_jun = "Jun"
+  let short_jul = "Jul"
+  let short_aug = "Aug"
+  let short_sep = "Sep"
+  let short_oct = "Oct"
+  let short_nov = "Nov"
+  let short_dec = "Dec"
+  let present = "Present"
+end
+
+module Current = Spanish
