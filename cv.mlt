@@ -2,6 +2,7 @@ open Melt
 open Latex
 open ExtLatex
 open Section
+open Calendar
 
 let prelude = "<:latex:<
 \usepackage[utf8]{inputenc}
@@ -41,7 +42,13 @@ let experience =
   let open Experience in
   section [
     (entry
-       ~date:(Between (YearMonth (Jul, 2019), Present))
+       ~date:(Between (YearMonth (Feb, 2021), Present))
+       ~company:"Falabella"
+       ~job_title:Lang.falabella_job
+       ~description:Lang.falabella_description
+    );
+    (entry
+       ~date:(Between (YearMonth (Jul, 2019), YearMonth (Feb, 2021)))
        ~company:"Concrete by Accenture"
        ~job_title:Lang.concrete_job
        ~description:Lang.concrete_description

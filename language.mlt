@@ -6,26 +6,35 @@ module type Language = sig
   val profile_description: Latex.t
 
   val professional_experience: Latex.t
+
+  val falabella_job: Latex.t
+  val falabella_description: Latex.t
+
   val concrete_job: Latex.t
   val concrete_description: Latex.t
   val techk_job: Latex.t
   val techk_description1: Latex.t
   val techk_description2: Latex.t
   val techk_description3: Latex.t
+
   val transapp_title: Latex.t
   val transapp_description: Latex.t
+
   val lazarillo_title: Latex.t
   val lazarillo_description: Latex.t
+
 
   val education: Latex.t
   val education_msc: Latex.t
   val education_prof: Latex.t
+
 
   val languages: Latex.t
   val lang_english: Latex.t
   val lang_english_level: Latex.t
   val lang_spanish: Latex.t
   val lang_spanish_level: Latex.t
+
 
   val skills: Latex.t
   val skill_lang: Latex.t
@@ -34,6 +43,7 @@ module type Language = sig
   val skill_framework_desc: Latex.t
   val skill_other_framework: Latex.t
   val skill_other_framework_desc: Latex.t
+
 
   val short_jan: Latex.t
   val short_feb: Latex.t
@@ -57,9 +67,17 @@ module Spanish: Language = struct
     "Desarrollador senior iOS con profundo conocimiento en arquitecturas
      de aplicación con foco en mantenibilidad y escalabilidad, y una base
      solida en ciencias de la computación. {newline}
-     Siempre dispuesto a aprender, y enseñar conocimiento."
+     Siempre dispuesto a aprender y enseñar conocimiento."
 
    let professional_experience= "Experiencia Profesional"
+
+  let falabella_job = "Desarrollador Senior iOS"
+  let falabella_description =
+    "Miembro de equipo en el desarrollo de la aplicación {emph "Falabella"}
+     El rol principal es mejorar mejorar las prácticas del equipo a nivel técnico:
+     fomenter buenas prácticas de ingenieria de software y arquitecura en aplicaciones iOS.
+     En particular, construí el pipeline principal de CI y comencé la migración
+     desde el sistema legacy."
 
   let concrete_job = "Desarrollador Senior iOS"
   let concrete_description =
@@ -126,9 +144,17 @@ module English: Language = struct
     "I am a senior iOS developer with a solid knowledge about
      application architecture with focus on maintainability and scalability,
      and strong computer science background. {newline}
-     Always willing to learn, and teach knowledge."
+     Always willing to learn and teach knowledge."
 
   let professional_experience= "Professional Experience"
+
+  let falabella_job = "Senior iOS Engineer"
+  let falabella_description =
+    "Team member that develops the {emph "Falabella"} application.
+     The principal role is to improve team practice at a technical level: foment
+     good practice in software engineering and architecture in iOS applications.
+     In particular, I build the main CI pipeline and started the migration from
+     the legacy system."
 
   let concrete_job = "Senior iOS Developer"
   let concrete_description =
@@ -185,4 +211,4 @@ module English: Language = struct
   let present = "Present"
 end
 
-module Current = Spanish
+module Current = English
