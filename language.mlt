@@ -73,7 +73,7 @@ module Spanish: Language = struct
 
   let falabella_job = "Desarrollador Senior iOS"
   let falabella_description =
-    "Miembro de equipo en el desarrollo de la aplicación {emph "Falabella"}
+    "Miembro de equipo en el desarrollo de la aplicación {emph "Falabella"}.
      El rol principal es mejorar mejorar las prácticas del equipo a nivel técnico:
      fomenter buenas prácticas de ingenieria de software y arquitecura en aplicaciones iOS.
      En particular, construí el pipeline principal de CI y comencé la migración
@@ -211,4 +211,4 @@ module English: Language = struct
   let present = "Present"
 end
 
-module Current = English
+module Current = Spanish
